@@ -40,8 +40,9 @@ namespace COMP212_Assignment_Lab2
             string depositToChequing = "Do you want to desposit $" + amount + "to " + rdChequing.Content;
             string withdrawalError = "You can not withdraw the amount exceeded the balance";
             string cancelOperation = "You choose to exit the application. Have a good day!";
+            string improperInput = "Please check the amount you are trying to enter";
 
-            if(rdSaving.IsChecked==true && rdWithdraw.IsChecked==true && rdChequing.IsChecked==false)
+           if(rdSaving.IsChecked==true && rdWithdraw.IsChecked==true && rdChequing.IsChecked==false)
             {
                 MessageBoxResult result = MessageBox.Show(withdrawFromSaving, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 switch (result)
@@ -64,6 +65,54 @@ namespace COMP212_Assignment_Lab2
                         break;
                     default:
                         break;
+
+                }
+            }
+            else if(rdChequing.IsChecked==true && rdWithdraw.IsChecked==true && rdSaving.IsChecked==false)
+            {
+                MessageBoxResult result = MessageBox.Show(withdrawFromChequing, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        if (amount > balance)
+                        {
+                            MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                        }
+                        else if (amount <= balance)
+                        {
+                            txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        MessageBox.Show(cancelOperation, "Exit", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+            else if (rdSaving.IsChecked==true && rdDeposit.IsChecked==true && rdChequing.IsChecked == false)
+            {
+                if(amount<=0 || string.IsNullOrEmpty(txtAmount.Text))
+                {
+                    MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else 
+                {
+                    MessageBoxResult result = MessageBox.Show(depositToSaving, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            txtBalance.Text = (balance + double.Parse(txtAmount.Text)).ToString();
+                            break;
+                        case MessageBoxResult.No:
+                            break;
+                        default:
+                            break;
+                    }
 
                 }
             }
