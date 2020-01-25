@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:COMP212_Assignment_Lab2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="WPF Centennial Account Management" Height="450" Width="400" Background="AliceBlue">
+    <StackPanel Orientation="Vertical">
     <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="130"/>
+            </Grid.RowDefinitions>
         
     </Grid>
+    </StackPanel>
 </Window>
