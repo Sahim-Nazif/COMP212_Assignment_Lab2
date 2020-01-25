@@ -44,6 +44,7 @@ namespace COMP212_Assignment_Lab2
 
            if(rdSaving.IsChecked==true && rdWithdraw.IsChecked==true && rdChequing.IsChecked==false)
             {
+               
                 MessageBoxResult result = MessageBox.Show(withdrawFromSaving, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 switch (result)
                 {
@@ -56,6 +57,7 @@ namespace COMP212_Assignment_Lab2
                         else if (amount <= balance)
                         {
                             txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
+                         
                         }
                         break;
                     case MessageBoxResult.No:
@@ -96,13 +98,36 @@ namespace COMP212_Assignment_Lab2
             }
             else if (rdSaving.IsChecked==true && rdDeposit.IsChecked==true && rdChequing.IsChecked == false)
             {
-                if(amount<=0 || string.IsNullOrEmpty(txtAmount.Text))
+                
+                if (amount<=0 || string.IsNullOrEmpty(txtAmount.Text))
                 {
                     MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else 
                 {
                     MessageBoxResult result = MessageBox.Show(depositToSaving, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            txtBalance.Text = (balance + double.Parse(txtAmount.Text)).ToString();
+                            break;
+                        case MessageBoxResult.No:
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+           else if (rdChequing.IsChecked==true && rdDeposit.IsChecked==true && rdSaving.IsChecked == false)
+            {
+                if (amount <= 0 || string.IsNullOrEmpty(txtAmount.Text))
+                {
+                    MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show(depositToChequing, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     switch (result)
                     {
                         case MessageBoxResult.Yes:
