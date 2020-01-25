@@ -24,5 +24,15 @@ namespace COMP212_Assignment_Lab2
         {
             InitializeComponent();
         }
+
+        private void BtnConfirm_Transaction(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -27,7 +27,7 @@
                         <Label Margin="3">Amount($):</Label>
                         <TextBox x:Name="txtAmount" Margin="3"  Width="160" />
                     </StackPanel>
-                    <Button Click="BtnConfirm_Transaction" Content="Ok" Width="160"/>
+                    <Button Click="BtnConfirm_Transaction"  Content="Ok" Width="160"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Row="2"  Header="Account Information"  Margin="30,10,30,-5" BorderBrush="Purple" BorderThickness="1.5">
