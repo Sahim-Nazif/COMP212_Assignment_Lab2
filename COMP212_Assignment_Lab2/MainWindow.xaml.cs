@@ -34,13 +34,39 @@ namespace COMP212_Assignment_Lab2
             balance = double.Parse(txtBalance.Text);
             
             /*Creating dialog messages to be passed in MessageBox*/
-            string withdrawFromSaving = "Do you want to withdraw $ " + amount + "from" + rdSaving.Content;
-            string withdrawFromChequing= "Do you want to withdraw $ " + amount + "from" + rdChequing.Content;
-            string depositToSaving= "Do you want to desposit $ " + amount + "to" + rdSaving.Content;
-            string depositToChequing = "Do you want to desposit $ " + amount + "to" + rdChequing.Content;
+            string withdrawFromSaving = "Do you want to withdraw $" + amount + " from " + rdSaving.Content;
+            string withdrawFromChequing= "Do you want to withdraw $" + amount + " from " + rdChequing.Content;
+            string depositToSaving= "Do you want to desposit $" + amount + "to " + rdSaving.Content;
+            string depositToChequing = "Do you want to desposit $" + amount + "to " + rdChequing.Content;
+            string withdrawalError = "You can not withdraw the amount exceeded the balance";
+            string cancelOperation = "You choose to exit the application. Have a good day!";
 
+            if(rdSaving.IsChecked==true && rdWithdraw.IsChecked==true && rdChequing.IsChecked==false)
+            {
+                MessageBoxResult result = MessageBox.Show(withdrawFromSaving, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        if (amount > balance)
+                        {
+                            MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                        }
+                        else if (amount <= balance)
+                        {
+                            txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        MessageBox.Show(cancelOperation, "Exit", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        break;
+                    default:
+                        break;
 
-
+                }
+            }
         }
 
         /*Will close the application*/
