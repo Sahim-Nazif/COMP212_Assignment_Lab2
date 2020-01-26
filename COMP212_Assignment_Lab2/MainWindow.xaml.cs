@@ -29,119 +29,130 @@ namespace COMP212_Assignment_Lab2
 
         private void BtnConfirm_Transaction(object sender, RoutedEventArgs e)
         {
-            //setting variables
-            amount = double.Parse(txtAmount.Text);
-            balance = double.Parse(txtBalance.Text);
-            
-            /*Creating dialog messages to be passed in MessageBox*/
-            string withdrawFromSaving = "Do you want to withdraw $" + amount + " from " + rdSaving.Content;
-            string withdrawFromChequing= "Do you want to withdraw $" + amount + " from " + rdChequing.Content;
-            string depositToSaving= "Do you want to desposit $" + amount + "to " + rdSaving.Content;
-            string depositToChequing = "Do you want to desposit $" + amount + "to " + rdChequing.Content;
-            string withdrawalError = "You can not withdraw the amount exceeded the balance";
-            string cancelOperation = "You choose to exit the application. Have a good day!";
-            string improperInput = "Please check the amount you are trying to enter";
-
-           if(rdSaving.IsChecked==true && rdWithdraw.IsChecked==true && rdChequing.IsChecked==false)
+            string nullError = "Please Enter the Amount to Perform The Transfer";
+            //checking if Textbox for the amount is null
+            if (txtAmount.Text == "")
             {
-               
-                MessageBoxResult result = MessageBox.Show(withdrawFromSaving, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        if (amount > balance)
-                        {
-                            MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
-                        }
-                        else if (amount <= balance)
-                        {
-                            txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
-                         
-                        }
-                        break;
-                    case MessageBoxResult.No:
-                        break;
-                    case MessageBoxResult.Cancel:
-                        MessageBox.Show(cancelOperation, "Exit", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        break;
-                    default:
-                        break;
-
-                }
+                MessageBox.Show(nullError, "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if(rdChequing.IsChecked==true && rdWithdraw.IsChecked==true && rdSaving.IsChecked==false)
+            else
             {
-                MessageBoxResult result = MessageBox.Show(withdrawFromChequing, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        if (amount > balance)
-                        {
-                            MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
-                        }
-                        else if (amount <= balance)
-                        {
-                            txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
-                        }
-                        break;
-                    case MessageBoxResult.No:
-                        break;
-                    case MessageBoxResult.Cancel:
-                        MessageBox.Show(cancelOperation, "Exit", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        break;
-                    default:
-                        break;
+                //setting variables
+                amount = double.Parse(txtAmount.Text);
+                balance = double.Parse(txtBalance.Text);
 
-                }
-            }
-            else if (rdSaving.IsChecked==true && rdDeposit.IsChecked==true && rdChequing.IsChecked == false)
-            {
-                
-                if (amount<=0 || string.IsNullOrEmpty(txtAmount.Text))
+                /*Creating dialog messages to be passed in MessageBox*/
+
+                string withdrawFromSaving = "Do you want to withdraw $" + amount + " from " + rdSaving.Content;
+                string withdrawFromChequing = "Do you want to withdraw $" + amount + " from " + rdChequing.Content;
+                string depositToSaving = "Do you want to desposit $" + amount + "to " + rdSaving.Content;
+                string depositToChequing = "Do you want to desposit $" + amount + "to " + rdChequing.Content;
+                string withdrawalError = "You can not withdraw the amount exceeded the balance";
+                string cancelOperation = "You choose to exit the application. Have a good day!";
+                string improperInput = "Please check the amount you are trying to enter";
+
+                if (rdSaving.IsChecked == true && rdWithdraw.IsChecked == true && rdChequing.IsChecked == false)
                 {
-                    MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else 
-                {
-                    MessageBoxResult result = MessageBox.Show(depositToSaving, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    MessageBoxResult result = MessageBox.Show(withdrawFromSaving, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                     switch (result)
                     {
                         case MessageBoxResult.Yes:
-                            txtBalance.Text = (balance + double.Parse(txtAmount.Text)).ToString();
+                            if (amount > balance)
+                            {
+                                MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                break;
+                            }
+                            else if (amount <= balance)
+                            {
+                                txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
+
+                            }
                             break;
                         case MessageBoxResult.No:
                             break;
+                        case MessageBoxResult.Cancel:
+                            MessageBox.Show(cancelOperation, "Exit", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            break;
                         default:
                             break;
-                    }
 
+                    }
                 }
-            }
-           else if (rdChequing.IsChecked==true && rdDeposit.IsChecked==true && rdSaving.IsChecked == false)
-            {
-                if (amount <= 0 || string.IsNullOrEmpty(txtAmount.Text))
+                else if (rdChequing.IsChecked == true && rdWithdraw.IsChecked == true && rdSaving.IsChecked == false)
                 {
-                    MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show(depositToChequing, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show(withdrawFromChequing, "Important Query", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                     switch (result)
                     {
                         case MessageBoxResult.Yes:
-                            txtBalance.Text = (balance + double.Parse(txtAmount.Text)).ToString();
+                            if (amount > balance)
+                            {
+                                MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                break;
+                            }
+                            else if (amount <= balance)
+                            {
+                                txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
+                            }
                             break;
                         case MessageBoxResult.No:
                             break;
+                        case MessageBoxResult.Cancel:
+                            MessageBox.Show(cancelOperation, "Exit", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            break;
                         default:
                             break;
-                    }
 
+                    }
+                }
+                else if (rdSaving.IsChecked == true && rdDeposit.IsChecked == true && rdChequing.IsChecked == false)
+                {
+
+                    if (amount <= 0 || string.IsNullOrEmpty(txtAmount.Text))
+                    {
+                        MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show(depositToSaving, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                txtBalance.Text = (balance + double.Parse(txtAmount.Text)).ToString();
+                                break;
+                            case MessageBoxResult.No:
+                                break;
+                            default:
+                                break;
+                        }
+
+                    }
+                }
+                else if (rdChequing.IsChecked == true && rdDeposit.IsChecked == true && rdSaving.IsChecked == false)
+                {
+                    if (amount <= 0 || string.IsNullOrEmpty(txtAmount.Text))
+                    {
+                        MessageBox.Show(improperInput, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show(depositToChequing, "Important Query", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                txtBalance.Text = (balance + double.Parse(txtAmount.Text)).ToString();
+                                break;
+                            case MessageBoxResult.No:
+                                break;
+                            default:
+                                break;
+                        }
+
+                    }
                 }
             }
         }
+           
 
         /*Will close the application*/
         private void Exit_Click(object sender, RoutedEventArgs e)
