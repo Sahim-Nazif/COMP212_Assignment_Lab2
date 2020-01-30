@@ -65,6 +65,11 @@ namespace COMP212_Assignment_Lab2
                                     MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                     break;
                                 }
+                                else if (amount <= 0)
+                                {
+                                    MessageBox.Show(withdrawalError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    break;
+                                }
                                 else if (amount <= balance)
                                 {
                                     txtBalance.Text = (balance - double.Parse(txtAmount.Text)).ToString();
@@ -155,13 +160,11 @@ namespace COMP212_Assignment_Lab2
                 }
             }
 
-          catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-   }
-
+        }
 
         /*Will close the application*/
         private void Exit_Click(object sender, RoutedEventArgs e)
